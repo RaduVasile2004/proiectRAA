@@ -2,6 +2,7 @@ import socket
 import struct
 import time
 import requests
+import json
 
 def get_ip_location(ip):
     try:
@@ -69,5 +70,10 @@ def traceroute(dest_ip, port=33434, max_hops=30, timeout=3):
 
     udp_sock.close()
     icmp_sock.close()
+
+    # Salvare în JSON
+    with open("route_data.json", "w") as f:
+        json.dump(result, f, indent=2)
+
     return result
 
